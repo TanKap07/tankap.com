@@ -23,6 +23,7 @@ I play the piano: Rachmaninoff and Scriabin are my favourites.
 | `public/index.html` | The whole site |
 | `public/tan.jpg` | Profile photo |
 | `wrangler.jsonc` | Cloudflare config: serves `public/` as a static site |
+| `src/worker.js` | Redirects www.tankap.com to tankap.com |
 
 ## Deployment
 

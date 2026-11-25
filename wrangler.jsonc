@@ -1,6 +1,7 @@
 {
   // Cloudflare Workers config: serve everything in ./public as a static site.
   "name": "tankap-com",
+  "main": "src/worker.js",
   "compatibility_date": "2026-11-01",
   // Only serve on tankap.com / www.tankap.com, not *.workers.dev.
   "workers_dev": false,
@@ -10,6 +11,9 @@
     { "pattern": "www.tankap.com", "custom_domain": true }
   ],
   "assets": {
-    "directory": "./public"
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Run src/worker.js first so it can redirect www before serving files.
+    "run_worker_first": true
   }
 }
