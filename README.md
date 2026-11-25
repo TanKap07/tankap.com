@@ -16,14 +16,6 @@ I play the piano: Rachmaninoff and Scriabin are my favourites.
 - [Catppuccin](https://catppuccin.com) colours: Mocha (dark, the default) and Latte (light), with a toggle
 - [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) and [Inter](https://fonts.google.com/specimen/Inter) from Google Fonts
 
-## Run it locally
-
-```bash
-python3 -m http.server 8000 -d public
-```
-
-Then open http://localhost:8000.
-
 ## Files
 
 | File | What it is |
