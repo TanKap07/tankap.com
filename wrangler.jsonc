@@ -1,0 +1,8 @@
+{
+  // Cloudflare Workers config: serve everything in ./public as a static site.
+  "name": "tankap-com",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./public"
+  }
+}

@@ -19,7 +19,7 @@ I play the piano: Rachmaninoff and Scriabin are my favourites.
 ## Run it locally
 
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8000 -d public
 ```
 
 Then open http://localhost:8000.
@@ -28,5 +28,10 @@ Then open http://localhost:8000.
 
 | File | What it is |
 | --- | --- |
-| `index.html` | The whole site |
-| `tan.jpg` | Profile photo |
+| `public/index.html` | The whole site |
+| `public/tan.jpg` | Profile photo |
+| `wrangler.jsonc` | Cloudflare config: serves `public/` as a static site |
+
+## Deployment
+
+Hosted on Cloudflare Workers, connected to this repo. Every push to `main` deploys automatically.
