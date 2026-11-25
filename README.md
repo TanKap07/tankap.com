@@ -2,7 +2,7 @@
 
 My personal website: a small one-page intro about me, what I'm building, and the piano.
 
-**Live at [tankap.com](https://tankap.com)** *(coming soon)*
+**Live at [tankap.com](https://tankap.com)**
 
 ## About
 
