@@ -114,7 +114,7 @@
       display: flex;
       align-items: center;
       gap: 24px;
-      margin-bottom: 36px;
+      margin-bottom: 30px;
     }
     .avatar {
       position: relative;
@@ -213,6 +213,7 @@
 
     /* 1. Terminal (CS) */
     .term {
+      margin: 0 0 22px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -266,7 +267,6 @@
       position: relative;
       display: flex;
       height: 72px;
-      margin-bottom: 8px;
       background: var(--key-white);
       touch-action: manipulation;
       user-select: none;
@@ -312,8 +312,6 @@
     @keyframes wave {
       40% { background: color-mix(in srgb, var(--mauve) 35%, var(--key-white)); }
     }
-    .hint { font-size: .8rem; color: var(--overlay); margin: 0 0 32px; }
-    @media (hover: none) { .kbd-hint { display: none; } }
 
     @media (max-width: 480px) {
       .intro { gap: 18px; }
@@ -341,21 +339,20 @@
     </header>
 
     <section class="reveal" style="--d:1">
-      <p>
-        I'm a BSc Computer Science student at
-        <a class="inline" href="https://www.ucl.ac.uk" target="_blank" rel="noopener">UCL</a>.
-      </p>
       <div class="strip term" aria-hidden="true">
         <span class="dots"><i></i><i></i><i></i></span>
         <span class="line"><span class="path">~</span> <span class="dollar">$</span> <span id="cmd"></span><span class="out" id="out"></span><span class="caret"></span></span>
       </div>
-    </section>
-
-    <section class="reveal" style="--d:2">
       <p>
-        Right now I'm working on
+        I'm a BSc Computer Science student at
+        <a class="inline" href="https://www.ucl.ac.uk" target="_blank" rel="noopener">UCL</a>,
+        interested in AI, systems and infrastructure, and software that makes a real difference
+        in healthcare. Right now I'm working on
         <a class="inline" href="https://github.com/HoloRepository/HoloRepository" target="_blank" rel="noopener">HoloRepository 2027</a>,
-        a clinical 3D imaging platform built through UCL IXN with industry and clinical partners.
+        a clinical 3D imaging platform built through UCL IXN with partners including NVIDIA, Intel,
+        Cisco and UCLH. It turns CT and DICOM scans into interactive 3D models that clinicians can
+        explore together, with GPU-accelerated rendering and AI organ segmentation running locally
+        on hospital hardware instead of in the cloud.
       </p>
       <div class="strip ecg" aria-hidden="true">
         <svg viewBox="0 0 600 44" preserveAspectRatio="none">
@@ -367,15 +364,15 @@
       </div>
     </section>
 
-    <section class="reveal" style="--d:3">
+    <section class="reveal" style="--d:2">
       <p>
         Away from the keyboard, I'm at a different keyboard: I've been playing the piano
         since middle school. Rachmaninoff and Scriabin are my favourites.
       </p>
       <div class="strip keys" id="piano" role="group" aria-label="Playable piano, two octaves from C4"></div>
-      <p class="hint">Tap the keys to play<span class="kbd-hint">, or use your keyboard: A–' for white keys, W E T Y U O P ] for black</span>.</p>
     </section>
-    <nav class="links reveal" style="--d:4" aria-label="Links">
+
+    <nav class="links reveal" style="--d:3" aria-label="Links">
       <a href="https://github.com/TanKap07" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
         GitHub
@@ -517,7 +514,7 @@
       var outEl = document.getElementById("out");
       var lines = [
         ["whoami", "tan"],
-        ["ls ~/interests", "cs  piano  3d-imaging"],
+        ["ls ~/interests", "ai  systems  piano"],
         ["git push", "live on tankap.com ✓"]
       ];
       var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
