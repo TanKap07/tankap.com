@@ -28,6 +28,7 @@ I play the piano: Rachmaninoff and Scriabin are my favourites.
 | --- | --- |
 | `public/index.html` | The whole site |
 | `public/tan.jpg` | Profile photo |
+| `public/favicon.ico`, `public/favicon-32.png`, `public/apple-touch-icon.png` | "TK" monogram icon for browser tabs, bookmarks and iPhone home screens |
 | `wrangler.jsonc` | Cloudflare config: serves `public/` as a static site |
 | `src/worker.js` | Redirects www.tankap.com to tankap.com |
 
