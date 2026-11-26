@@ -152,7 +152,7 @@
       font-size: clamp(2.5rem, 9vw, 4.2rem);
       line-height: 1;
       letter-spacing: -0.01em;
-      margin: 0 0 14px;
+      margin: 0;
     }
     h1 em {
       background: linear-gradient(90deg, var(--mauve), var(--pink), var(--peach), var(--mauve));
@@ -169,20 +169,28 @@
       50%      { background-position: 100% 50%; }
     }
 
-    .socials { display: flex; gap: 8px; }
-    .socials a {
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
       border: 1px solid var(--surface0);
-      border-radius: 50%;
+      border-radius: 999px;
       background: var(--mantle);
-      color: var(--subtext);
+      color: var(--text);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
       transition: border-color .15s, color .15s, transform .15s;
     }
-    .socials a:hover { border-color: var(--mauve); color: var(--mauve); transform: translateY(-2px); }
-    .socials svg { width: 17px; height: 17px; fill: currentColor; }
+    .links a:hover { border-color: var(--mauve); color: var(--mauve); transform: translateY(-2px); }
+    .links svg { width: 16px; height: 16px; fill: currentColor; }
 
     p { margin: 0 0 16px; }
     a.inline {
@@ -253,32 +261,59 @@
     }
     @keyframes trace { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
 
-    /* 3. Piano keys */
-    .keys { display: flex; background: var(--key-white); }
-    .keys span {
-      flex: 1;
-      border-right: 1px solid var(--surface0);
+    /* 3. Piano keys (playable) */
+    .keys {
       position: relative;
-      transition: background-color .2s;
-      animation: press .45s ease-out both;
+      display: flex;
+      height: 72px;
+      margin-bottom: 8px;
+      background: var(--key-white);
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .keys button {
+      appearance: none;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .keys .white {
+      flex: 1;
+      background: var(--key-white);
+      border-right: 1px solid var(--surface0);
+      transition: background-color .12s;
+      animation: wave .45s ease-out both;
       animation-delay: calc(1.2s + var(--i, 0) * 55ms);
     }
-    .keys span:last-child { border-right: 0; }
-    .keys span:hover { background: color-mix(in srgb, var(--mauve) 25%, var(--key-white)); }
-    .keys span.b::after {
-      content: "";
+    .keys .white:last-child { border-right: 0; }
+    .keys .black {
       position: absolute;
       top: 0;
-      right: -30%;
-      width: 60%;
+      width: calc(100% / 14 * .6);
       height: 60%;
+      transform: translateX(-50%);
       background: var(--key-black);
       border-radius: 0 0 3px 3px;
       z-index: 1;
+      transition: background-color .12s, height .08s;
     }
-    @keyframes press {
+    @media (hover: hover) {
+      .keys .white:hover { background: color-mix(in srgb, var(--mauve) 18%, var(--key-white)); }
+      .keys .black:hover { background: color-mix(in srgb, var(--mauve) 30%, var(--key-black)); }
+    }
+    .keys.played .white { animation: none; }
+    .keys .white.on { background: color-mix(in srgb, var(--mauve) 45%, var(--key-white)); }
+    .keys .black.on { background: var(--mauve); height: 58%; }
+    .keys button:focus-visible { outline: 2px solid var(--mauve); outline-offset: -2px; }
+    @keyframes wave {
       40% { background: color-mix(in srgb, var(--mauve) 35%, var(--key-white)); }
     }
+    .hint { font-size: .8rem; color: var(--overlay); margin: 0 0 32px; }
+    @media (hover: none) { .kbd-hint { display: none; } }
 
     @media (max-width: 480px) {
       .intro { gap: 18px; }
@@ -302,20 +337,7 @@
   <main>
     <header class="intro reveal" style="--d:0">
       <div class="avatar"><img src="tan.jpg" alt="Tan Kap" width="480" height="480"></div>
-      <div>
-        <h1>Hi, I'm <em>Tan Kap</em>.</h1>
-        <nav class="socials" aria-label="Links">
-          <a href="https://github.com/TanKap07" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
-          </a>
-          <a href="https://linkedin.com/in/tan-kap" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
-          </a>
-          <a href="mailto:tankap07@gmail.com" aria-label="Email" title="Email">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13Zm2.3-.5 7.7 6.16L19.7 5H4.3ZM20 6.58l-7.38 5.9a1 1 0 0 1-1.24 0L4 6.58V18.5c0 .28.22.5.5.5h15a.5.5 0 0 0 .5-.5V6.58Z"/></svg>
-          </a>
-        </nav>
-      </div>
+      <h1>Hi, I'm <em>Tan Kap</em>.</h1>
     </header>
 
     <section class="reveal" style="--d:1">
@@ -350,11 +372,23 @@
         Away from the keyboard, I'm at a different keyboard: I've been playing the piano
         since middle school. Rachmaninoff and Scriabin are my favourites.
       </p>
-      <div class="strip keys" aria-hidden="true">
-        <span class="b"></span><span class="b"></span><span></span><span class="b"></span><span class="b"></span><span class="b"></span><span></span>
-        <span class="b"></span><span class="b"></span><span></span><span class="b"></span><span class="b"></span><span class="b"></span><span></span>
-      </div>
+      <div class="strip keys" id="piano" role="group" aria-label="Playable piano, two octaves from C4"></div>
+      <p class="hint">Tap the keys to play<span class="kbd-hint">, or use your keyboard: A–' for white keys, W E T Y U O P ] for black</span>.</p>
     </section>
+    <nav class="links reveal" style="--d:4" aria-label="Links">
+      <a href="https://github.com/TanKap07" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        GitHub
+      </a>
+      <a href="https://linkedin.com/in/tan-kap" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:tankap07@gmail.com">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h15A2.5 2.5 0 0 1 22 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 18.5v-13Zm2.3-.5 7.7 6.16L19.7 5H4.3ZM20 6.58l-7.38 5.9a1 1 0 0 1-1.24 0L4 6.58V18.5c0 .28.22.5.5.5h15a.5.5 0 0 0 .5-.5V6.58Z"/></svg>
+        Email
+      </a>
+    </nav>
   </main>
 
   <script>
@@ -366,10 +400,116 @@
       try { localStorage.setItem("theme", next); } catch (e) {}
     });
 
-    // Piano keys light up in a wave on load
-    document.querySelectorAll(".keys span").forEach(function (key, i) {
-      key.style.setProperty("--i", i);
-    });
+    // Playable piano: two octaves, C4 to B5, with synthesised sound (no audio files)
+    (function () {
+      var piano = document.getElementById("piano");
+      var NAMES = ["C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯", "A", "A♯", "B"];
+      var WHITE = [0, 2, 4, 5, 7, 9, 11];
+      var WHITE_KEYS = "asdfghjkl;'".split("");          // first 11 white keys
+      var BLACK_KEYS = { 61: "w", 63: "e", 66: "t", 68: "y", 70: "u", 73: "o", 75: "p", 78: "]" };
+      var byCode = {};
+      var ctx = null;
+
+      function freq(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
+
+      function makeKey(midi, cls, label) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = cls;
+        b.dataset.midi = midi;
+        b.setAttribute("aria-label", label);
+        return b;
+      }
+
+      // Build 14 white keys and the black keys that sit between them
+      var whiteIndex = 0;
+      for (var oct = 0; oct < 2; oct++) {
+        WHITE.forEach(function (step) {
+          var midi = 60 + oct * 12 + step;
+          var w = makeKey(midi, "white", NAMES[step] + (4 + oct));
+          w.style.setProperty("--i", whiteIndex);
+          piano.appendChild(w);
+          if (whiteIndex < WHITE_KEYS.length) byCode[WHITE_KEYS[whiteIndex]] = w;
+          if ([0, 2, 5, 7, 9].indexOf(step) !== -1) {
+            var bMidi = midi + 1;
+            var k = makeKey(bMidi, "black", NAMES[step + 1] + (4 + oct));
+            k.style.left = ((whiteIndex + 1) / 14 * 100) + "%";
+            piano.appendChild(k);
+            if (BLACK_KEYS[bMidi]) byCode[BLACK_KEYS[bMidi]] = k;
+          }
+          whiteIndex++;
+        });
+      }
+
+      function play(midi) {
+        if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+        if (ctx.state === "suspended") ctx.resume();
+        var t = ctx.currentTime;
+        var f = freq(midi);
+        var out = ctx.createGain();
+        out.gain.setValueAtTime(0.0001, t);
+        out.gain.exponentialRampToValueAtTime(0.28, t + 0.008);
+        out.gain.exponentialRampToValueAtTime(0.0001, t + 1.8);
+        var tone = ctx.createBiquadFilter();
+        tone.type = "lowpass";
+        tone.frequency.setValueAtTime(Math.min(f * 8, 9000), t);
+        tone.frequency.exponentialRampToValueAtTime(Math.max(f * 1.5, 300), t + 1.2);
+        out.connect(tone).connect(ctx.destination);
+        // A few harmonics for a soft, piano-ish tone
+        [[1, "triangle", 1], [2, "sine", 0.35], [3, "sine", 0.12]].forEach(function (h) {
+          var osc = ctx.createOscillator();
+          var g = ctx.createGain();
+          osc.type = h[1];
+          osc.frequency.value = f * h[0];
+          g.gain.value = h[2];
+          osc.connect(g).connect(out);
+          osc.start(t);
+          osc.stop(t + 1.9);
+        });
+      }
+
+      function flash(key) {
+        key.classList.add("on");
+        clearTimeout(key._t);
+        key._t = setTimeout(function () { key.classList.remove("on"); }, 180);
+      }
+
+      function hit(key) { piano.classList.add("played"); play(+key.dataset.midi); flash(key); }
+
+      // Once the intro wave finishes, stop it for good so it never replays
+      piano.addEventListener("animationend", function (e) { e.target.style.animation = "none"; });
+
+      // Mouse and touch: press, and glide across keys while held down
+      var down = false;
+      piano.addEventListener("pointerdown", function (e) {
+        var key = e.target.closest("button");
+        if (!key) return;
+        e.preventDefault();
+        down = true;
+        hit(key);
+      });
+      piano.addEventListener("pointerover", function (e) {
+        var key = e.target.closest("button");
+        if (down && key && e.pointerType === "mouse") hit(key);
+      });
+      window.addEventListener("pointerup", function () { down = false; });
+      window.addEventListener("pointercancel", function () { down = false; });
+
+      // Enter/Space on a focused key
+      piano.addEventListener("keydown", function (e) {
+        if ((e.key === "Enter" || e.key === " ") && e.target.matches("button")) {
+          e.preventDefault();
+          hit(e.target);
+        }
+      });
+
+      // Computer keyboard
+      window.addEventListener("keydown", function (e) {
+        if (e.repeat || e.metaKey || e.ctrlKey || e.altKey) return;
+        var key = byCode[e.key.toLowerCase()];
+        if (key) { e.preventDefault(); hit(key); }
+      });
+    })();
 
     // Terminal: type a few commands on a loop
     (function () {
