@@ -7,7 +7,7 @@ My personal website: a small one-page intro about me, what I'm building, and the
 ## About
 
 I'm Tan Kap, a BSc Computer Science student at UCL, currently working on
-[HoloRepository 2027](https://github.com/HoloRepository/HoloRepository). Outside of code
+[HoloRepository](https://github.com/HoloRepository/HoloRepository). Outside of code
 I play the piano: Rachmaninoff and Scriabin are my favourites.
 
 ## Features
