@@ -6,15 +6,21 @@ My personal website: a small one-page intro about me, what I'm building, and the
 
 ## About
 
-I'm Tan Kap, a second-year Computer Science undergraduate at UCL, currently working on
+I'm Tan Kap, a BSc Computer Science student at UCL, currently working on
 [HoloRepository 2027](https://github.com/HoloRepository/HoloRepository). Outside of code
 I play the piano: Rachmaninoff and Scriabin are my favourites.
 
+## Features
+
+- An animated terminal, a heartbeat monitor trace and a piano keyboard as visuals
+- A playable two-octave piano: click, tap or use your computer keyboard; the sound is synthesised with the Web Audio API, so there are no audio files
+- Dark and light themes, and a still version for visitors who prefer reduced motion
+
 ## Built with
 
-- Plain HTML and CSS, no framework and no build step
+- Plain HTML, CSS and JavaScript, no framework and no build step
 - [Catppuccin](https://catppuccin.com) colours: Mocha (dark, the default) and Latte (light), with a toggle
-- [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif) and [Inter](https://fonts.google.com/specimen/Inter) from Google Fonts
+- [Instrument Serif](https://fonts.google.com/specimen/Instrument+Serif), [Inter](https://fonts.google.com/specimen/Inter) and [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono) from Google Fonts
 
 ## Files
 
